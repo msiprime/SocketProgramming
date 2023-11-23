@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -25,5 +26,10 @@ class Client3 {
 }
 
 class Server {
+    public static void main(String[] args) throws IOException {
+        ServerSocket ss = new ServerSocket(3440);
+        System.out.println("Waiting for client");
 
+        Socket s = ss.accept();
+    }
 }
