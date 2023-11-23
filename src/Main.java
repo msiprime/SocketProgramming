@@ -3,7 +3,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,5 +32,26 @@ class Server {
 
         DataInputStream dis = new DataInputStream(s.getInputStream());
         DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+
+        Thread t = new ClientHandler(s, dis, dos);
+        t.start();
+    }
+}
+
+class ClientHandler extends Thread {
+    final Socket s;
+    DataInputStream dis;
+    DataOutputStream dos;
+
+    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos) {
+        this.s = s;
+        this.dos = dos;
+        this.dis = dis;
+    }
+
+    @Override
+    public void run() {
+        DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat fortime = new SimpleDateFormat("hh:mm:ss");
     }
 }
