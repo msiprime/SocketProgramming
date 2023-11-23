@@ -1,3 +1,5 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,19 +19,15 @@ class Client1 {
     }
 }
 
-class Client2 {
-
-}
-
-class Client3 {
-
-}
-
 class Server {
     public static void main(String[] args) throws IOException {
         ServerSocket ss = new ServerSocket(3440);
         System.out.println("Waiting for client");
 
         Socket s = ss.accept();
+        System.out.println("A new client is connected");
+
+        DataInputStream dis = new DataInputStream(s.getInputStream());
+        DataOutputStream dos = new DataOutputStream(s.getOutputStream());
     }
 }
