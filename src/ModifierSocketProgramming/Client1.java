@@ -1,3 +1,5 @@
+package ModifierSocketProgramming;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,18 +15,22 @@ public class Client1 {
         DataInputStream dis = new DataInputStream(socket.getInputStream());
 
         while (true) {
-            System.out.println(dis.readUTF());
-            String toSend = sc.nextLine();
-            dos.writeUTF(toSend);
-
-            if (toSend.equals("Bye")) {
+            System.out.println("Enter first number:");
+            int num1 = sc.nextInt();
+            System.out.println("Enter second number:");
+            int num2 = sc.nextInt();
+            System.out.println("Enter operator (Sum/Subtract/Multiplication/Division/Modules/ENDS):");
+            String operator = sc.next();
+            dos.writeInt(num1);
+            dos.writeInt(num2);
+            dos.writeUTF(operator);
+            int result = dis.readInt();
+            System.out.println("Result from server: " + result);
+            if (operator.equals("ENDS")) {
                 System.out.println("Closing the connection" + socket);
                 socket.close();
                 break;
             }
-
-            String received = dis.readUTF();
-            System.out.println(received);
         }
     }
 }
