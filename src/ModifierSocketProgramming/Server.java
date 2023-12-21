@@ -23,7 +23,6 @@ public class Server {
             Thread new_tunnel = new ClientHandler(com_socket, dis, dos);
             new_tunnel.start();
         }
-
         handshake.close();
     }
 }
